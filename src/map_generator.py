@@ -196,13 +196,17 @@ class Map:
     def scroll_bumptiles(self):
         #this takes in the list of tiles you can't walk through, and 
         #returns a new list of those tile rect translated with the camera.        
-        collision_tiles_list = []
+        #collision_tiles_list = []
         
         for b in self.bumplist:
-            #check this if they're scrolling weird
-            newrect = pygame.Rect(b.x-self.camera.x - 5, b.y-self.camera.y - 10,self.tile_size_x, self.tile_size_y)
-            collision_tiles_list.append(newrect)
-        return collision_tiles_list
+            if self.scrolling_up == True:
+                b.y += self.speed
+            elif self.scrolling_down == True:
+                b.y -= self.speed
+            elif self.scrolling_right == True:
+                b.x -= self.speed
+            elif self.scrolling_left == True:
+                b.x += self.speed
     
     def update(self, scene, surface):  
         
